@@ -16,29 +16,55 @@ class App extends Component {
     recipes: [
       {
         recipeName: 'Joe',
-        ingredients: ['Brown Hair', 'Glasses', 'intelligence']
+        ingredients: ['Brown Hair1', 'Glasses1', 'intelligence1']
       },
       {
         recipeName: 'Joe2',
-        ingredients: ['Brown Hair', 'Glasses', 'intelligence']
+        ingredients: ['Brown Hair2', 'Glasses2', 'intelligence2']
       },
       {
         recipeName: 'Joe3',
-        ingredients: ['Brown Hair', 'Glasses', 'intelligence']
+        ingredients: ['Brown Hair3', 'Glasses3', 'intelligence3']
       }
     ]
   }
+
+  deleteRecipe(ingredientNumber){
+    let recipe = this.state.recipes;
+    for(let i = 0;i<recipe.length;i++){
+      if(i === ingredientNumber){
+        recipe.splice(i,1);
+        this.setState({
+          recipes: recipe
+        })
+      }
+    }
+  }
+
+
   render() {
 
     const {recipes} = this.state;
+    console.log(recipes);
 
     return (
-      <div className="App">
-        <Accordion>
-          {recipes.map((recipe, i)=>{
-            <Panel header={recipe.recipeName} eventKey={i}></Panel>
-          })}
+      <div className="App container">
+        <Accordion bsStyle='danger'>
+          {recipes.map((recipe, i)=>(
+            <Panel header={recipe.recipeName} eventKey={i} key={i}>
+              <ol>
+                {recipe.ingredients.map((ingredient, i)=>(
+                  <li key={i}>{ingredient}</li>
+                ))}
+              </ol>
+              <ButtonToolbar>
+                <Button onClick={()=>(this.deleteRecipe(i))} bsStyle='danger'>Delete Recipe</Button>
+                <Button bsStyle='primary'>Edit Recipe</Button>
+              </ButtonToolbar>
+            </Panel>
+          ))}
         </Accordion>
+        <Button bsStyle='primary'>Add Recipe</Button>
       </div>
     );
   }
