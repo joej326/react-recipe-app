@@ -12,10 +12,33 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 
 
 class App extends Component {
+  state = {
+    recipes: [
+      {
+        recipeName: 'Joe',
+        ingredients: ['Brown Hair', 'Glasses', 'intelligence']
+      },
+      {
+        recipeName: 'Joe2',
+        ingredients: ['Brown Hair', 'Glasses', 'intelligence']
+      },
+      {
+        recipeName: 'Joe3',
+        ingredients: ['Brown Hair', 'Glasses', 'intelligence']
+      }
+    ]
+  }
   render() {
+
+    const {recipes} = this.state;
+
     return (
       <div className="App">
-
+        <Accordion>
+          {recipes.map((recipe, i)=>{
+            <Panel header={recipe.recipeName} eventKey={i}></Panel>
+          })}
+        </Accordion>
       </div>
     );
   }
