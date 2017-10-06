@@ -16,15 +16,15 @@ class App extends Component {
     recipes: [
       {
         recipeName: 'Joe',
-        ingredients: ['Brown Hair1', 'Glasses1', 'intelligence1']
+        ingredients: ['Brown Hair1', 'Glasses1', 'curls1']
       },
       {
         recipeName: 'Joe2',
-        ingredients: ['Brown Hair2', 'Glasses2', 'intelligence2']
+        ingredients: ['Brown Hair2', 'Glasses2', 'curls2']
       },
       {
         recipeName: 'Joe3',
-        ingredients: ['Brown Hair3', 'Glasses3', 'intelligence3']
+        ingredients: ['Brown Hair3', 'Glasses3', 'curls3']
       }
     ]
   }
@@ -49,7 +49,7 @@ class App extends Component {
 
     return (
       <div className="App container">
-        <Accordion bsStyle='danger'>
+        <Accordion>
           {recipes.map((recipe, i)=>(
             <Panel header={recipe.recipeName} eventKey={i} key={i}>
               <ol>
