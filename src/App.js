@@ -26,11 +26,12 @@ class App extends Component {
         recipeName: 'Joe3',
         ingredients: ['Brown Hair3', 'Glasses3', 'curls3']
       }
-    ]
+    ],
+    showAdd: false
   }
 
   deleteRecipe(ingredientNumber){
-    let recipe = this.state.recipes;
+    let recipe = this.state.recipes.slice();
     for(let i = 0;i<recipe.length;i++){
       if(i === ingredientNumber){
         recipe.splice(i,1);
@@ -39,6 +40,10 @@ class App extends Component {
         })
       }
     }
+  }
+
+  closeAdd(){
+    alert('its closed');
   }
 
 
@@ -64,7 +69,11 @@ class App extends Component {
             </Panel>
           ))}
         </Accordion>
-        <Button bsStyle='primary'>Add Recipe</Button>
+
+        <Modal onClick={()=>this.showAdd()} show={this.state.showAdd} onHide={()=>this.closeAdd()}></Modal>
+
+
+        <Button onClick={()=>this.closeAdd()} bsStyle='primary'>Add Recipe</Button>
       </div>
     );
   }
