@@ -27,7 +27,11 @@ class App extends Component {
         ingredients: ['Brown Hair3', 'Glasses3', 'curls3']
       }
     ],
-    showAdd: false
+    showAdd: false,
+    newestRecipe: {
+      recipeName: '',
+      ingredients: []
+    }
   }
 
   //deletes a recipe
@@ -56,6 +60,12 @@ class App extends Component {
     this.setState({
       showAdd: true
     }, ()=>(console.log(this.state.showAdd)));
+  }
+
+  updateValue(value){
+    this.setState({
+      newestRecipe: value
+    });
   }
 
 
@@ -89,7 +99,15 @@ class App extends Component {
            <Modal.Header closeButton></Modal.Header> {/*"closeButton" adds the "x" so we can close the modal */}
            <Modal.Title>Add Recipe</Modal.Title>
            <Modal.Body>
-             
+             <FormGroup>
+               <ControlLabel>Recipe Name</ControlLabel>
+               <FormControl
+                type='text'
+                value={this.state.newestRecipe.recipeName}
+                placeholder='Enter Recipe Name'
+                onChange={(e)=> (this.updateValue(e.target.value))}
+                 ></FormControl>
+             </FormGroup>
            </Modal.Body>
         </Modal>
 
