@@ -30,6 +30,7 @@ class App extends Component {
     showAdd: false
   }
 
+  //deletes a recipe
   deleteRecipe(ingredientNumber){
     let recipe = this.state.recipes.slice();
     for(let i = 0;i<recipe.length;i++){
@@ -42,15 +43,25 @@ class App extends Component {
     }
   }
 
+  //closes a modal
   closeAdd(){
-    alert('its closed');
+    if(this.state.showAdd){
+      this.setState({
+        showAdd: false
+      });
+    }
+  }
+  //opens a modal
+  openAdd(){
+    this.setState({
+      showAdd: true
+    }, ()=>(console.log(this.state.showAdd)));
   }
 
 
   render() {
 
     const {recipes} = this.state;
-    console.log(recipes);
 
     return (
       <div className="App container">
@@ -70,10 +81,22 @@ class App extends Component {
           ))}
         </Accordion>
 
-        <Modal onClick={()=>this.showAdd()} show={this.state.showAdd} onHide={()=>this.closeAdd()}></Modal>
+
+        {/* this modal was not working correctly in react 16
+        The following code fixed the issue:
+        npm install --save react@15.6.2 react-dom@15.6.2 */}
+        <Modal show={this.state.showAdd} onHide={()=>this.closeAdd()}>
+           <Modal.Header closeButton></Modal.Header> {/*"closeButton" adds the "x" so we can close the modal */}
+           <Modal.Title>Add Recipe</Modal.Title>
+           <Modal.Body>
+             
+           </Modal.Body>
+        </Modal>
 
 
-        <Button onClick={()=>this.closeAdd()} bsStyle='primary'>Add Recipe</Button>
+        <Button onClick={()=>this.openAdd()} bsStyle='primary'>Add Recipe</Button>
+
+
       </div>
     );
   }
